@@ -6,6 +6,7 @@ export const App = () => {
   const [step, setStep] = useState(1)
   const [namePet, setNamePet] = useState('');
   const [color, setColor] = useState('');
+  const [fontSize, setFontSize] = useState(16);
 
   const proceedToNextStep = () => {
     setStep(prevStep => prevStep + 1);
@@ -27,8 +28,8 @@ export const App = () => {
       )}
       {step === 3 && (
         <div style={{ 
+          fontSize: `${fontSize}px`,
           backgroundColor: color,
-      // color: getTextColor(color),
       position: 'fixed',
       top: 0,
       left: 0,
@@ -42,6 +43,13 @@ export const App = () => {
         <h3>your new pet</h3>
         <p>name: {namePet}</p>
         <p>color: {color}</p>
+        <input 
+      type="range" 
+      min="10" 
+      max="50" 
+      value={fontSize} 
+      onChange={(e) => setFontSize(parseInt(e.target.value, 10))}
+    />
       </div>
       )}
     </div>
