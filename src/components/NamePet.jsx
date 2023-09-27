@@ -20,7 +20,7 @@ const NamePet = ({ onNext, setNamePetProp }) => {
 
     console.log(namePet); 
     setNamePetProp(namePet); 
-    onNext();
+    onNext(namePet);
   };
 
   return (

@@ -3,15 +3,24 @@ import NamePet from './components/NamePet';
 import ColorPet from './components/ColorPet';
 
 export const App = () => {
-  const totalSteps = 2;
+  const totalSteps = 3;
   const [step, setStep] = useState(1)
   const [namePet, setNamePet] = useState('');
+  const [hours, setHours] = useState('');
   const [color, setColor] = useState('');
   const [fontSize, setFontSize] = useState(16);
 
-  const proceedToNextStep = () => {
-    setStep(prevStep => prevStep + 1);
-  };
+  const proceedToNextStep = (petName) => {
+    if (step === 1 && (petName || namePet).length === 2) {
+      setStep(2); // Move to the "hours with pet" step if pet's name is 2 characters
+    } else if (step === 1) {
+      setStep(3); // Skip to the ColorPet step if pet's name is not 2 characters
+    } else {
+      setStep(prevStep => prevStep + 1);
+    }
+};
+
+  
 
   const progressPercentage = (step / totalSteps) * 100;
 
@@ -27,12 +36,19 @@ export const App = () => {
 
       </>
       )}
-      {step === 2 && (
-      <>
-        <ColorPet onNext={proceedToNextStep} setColorPetProp={setColor} />
-      </>
+       {step === 2 && (
+        <>
+          <h3>How long in the day can you spend with your new pet?</h3>
+          <input type="number" min="0" max="24" value={hours} onChange={(e) => setHours(e.target.value)} />
+          <button onClick={proceedToNextStep}>Next</button>
+        </>
       )}
       {step === 3 && (
+        <>
+          <ColorPet onNext={proceedToNextStep} setColorPetProp={setColor} />
+        </>
+      )}
+      {step === 4 && (
         <div style={{ 
           fontSize: `${fontSize}px`,
           backgroundColor: color,
