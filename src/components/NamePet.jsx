@@ -21,6 +21,7 @@ const NamePet = ({ onNext, setNamePetProp }) => {
         value={namePet} 
         onChange={handleNamePet}
         style={{ width : '210px'}} 
+        required
       />
       <button type="submit">Next</button>
     </form>
