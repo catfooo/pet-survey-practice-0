@@ -3,6 +3,7 @@ import NamePet from './components/NamePet';
 import ColorPet from './components/ColorPet';
 
 export const App = () => {
+  const totalSteps = 2;
   const [step, setStep] = useState(1)
   const [namePet, setNamePet] = useState('');
   const [color, setColor] = useState('');
@@ -12,8 +13,13 @@ export const App = () => {
     setStep(prevStep => prevStep + 1);
   };
 
+  const progressPercentage = (step / totalSteps) * 100;
+
   return (
     <div>
+      <div style={{ background: 'lightgray', height: '20px', marginBottom: '10px' }}>
+        <div style={{ width: `${progressPercentage}%`, height: '100%', background: 'blue' }}></div>
+      </div>
       {step ===1 && (
       <>
       <h3>what will be the name of this pet?</h3>
